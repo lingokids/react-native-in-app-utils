@@ -12,8 +12,8 @@
     NSMutableDictionary *_callbacks;
     
     //Initial in-app purchase
-    SKProduct *initialProduct;
-    SKPayment *initialPayment;
+    SKProduct *promotedProduct;
+    SKPayment *promotedProductPayment;
 }
 
 - (instancetype)init
@@ -277,24 +277,24 @@ RCT_EXPORT_METHOD(receiptData:(RCTResponseSenderBlock)callback)
 #pragma In-app purchases promotion
 
 - (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product {
-    initialProduct = product;
-    initialPayment = payment;
+    promotedProduct = product;
+    promotedProductPayment = payment;
     if(hasListeners) {
-        [self sendEventWithName:@"OnInitialProduct" body:payment.productIdentifier];
+        [self sendEventWithName:@"OnPromotedProduct" body:payment.productIdentifier];
     }
     return false;
 }
 
-RCT_EXPORT_METHOD(getInitialProduct: (RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getPromotedProduct: (RCTResponseSenderBlock)callback)
 {
-    callback(@[initialProduct ? initialProduct.productIdentifier : [NSNull null]]);
+    callback(@[promotedProduct ? promotedProduct.productIdentifier : [NSNull null]]);
 }
 
-RCT_EXPORT_METHOD(buyInitialProduct:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(buyPromotedProduct:(RCTResponseSenderBlock)callback)
 {
-    if(initialPayment) {
-        [[SKPaymentQueue defaultQueue] addPayment:initialPayment];
-        _callbacks[RCTKeyForInstance(initialPayment.productIdentifier)] = callback;
+    if(promotedProductPayment) {
+        [[SKPaymentQueue defaultQueue] addPayment:promotedProductPayment];
+        _callbacks[RCTKeyForInstance(promotedProductPayment.productIdentifier)] = callback;
     }
     else {
         callback(@[@"no_initial_product"]);
