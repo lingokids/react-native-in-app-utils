@@ -34,7 +34,7 @@ RCT_EXPORT_MODULE()
 
 - (NSArray<NSString *> *)supportedEvents
 {
-    return @[@"OnInitialProduct"];
+    return @[@"OnPromotedProduct"];
 }
 
 -(void)startObserving {
