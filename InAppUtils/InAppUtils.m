@@ -11,7 +11,7 @@
     NSArray *products;
     NSMutableDictionary *_callbacks;
     
-    //Initial in-app purchase
+    //Promoted in-app purchase
     SKProduct *promotedProduct;
     SKPayment *promotedProductPayment;
 }
