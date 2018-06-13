@@ -275,7 +275,7 @@ RCT_EXPORT_METHOD(receiptData:(RCTResponseSenderBlock)callback)
     return purchase;
 }
 
-#pragma In-app purchases promotion
+#pragma mark In-app purchases promotion
 
 - (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product {
     promotedProduct = product;
