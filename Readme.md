@@ -4,8 +4,7 @@ A react-native wrapper for handling in-app purchases.
 
 # Breaking Change
 
-- Due to a major breaking change in RN 0.40+, Use v5.x of this lib when installing from npm.
-
+- Due to a major breaking change in RN 0.40+, use version 5 or higher of this lib when installing from npm.
 
 # Notes
 
@@ -17,11 +16,9 @@ A react-native wrapper for handling in-app purchases.
 
 ### Add it to your project
 
-1. Make sure you have `rnpm` installed: `npm install rnpm -g`
+1.Install with react-native cli `react-native install react-native-in-app-utils`
 
-2. Install with rnpm: `rnpm install react-native-in-app-utils`
-
-3. Whenever you want to use it within React code now you just have to do: `var InAppUtils = require('NativeModules').InAppUtils;`
+2. Whenever you want to use it within React code now you just have to do: `var InAppUtils = require('NativeModules').InAppUtils;`
    or for ES6:
 
 ```
@@ -97,11 +94,14 @@ https://stackoverflow.com/questions/29255568/is-there-any-way-to-know-purchase-m
 
 | Field                 | Type   | Description                                        |
 | --------------------- | ------ | -------------------------------------------------- |
+| originalTransactionDate        | number | The original transaction date (ms since epoch)     |
+| originalTransactionIdentifier  | string | The original transaction identifier                |
 | transactionDate       | number | The transaction date (ms since epoch)              |
 | transactionIdentifier | string | The transaction identifier                         |
 | productIdentifier     | string | The product identifier                             |
 | transactionReceipt    | string | The transaction receipt as a base64 encoded string |
 
+**NOTE:**  `originalTransactionDate` and `originalTransactionIdentifier` are only available for subscriptions that were previously cancelled or expired.
 
 ### Restore payments
 
